@@ -1,7 +1,7 @@
 class Config {
     static readonly defaultConfig = {
         host: 'localhost',
-        port: 3000,
+        port: Number(process.env.PORT) || 3000,
         protocol: 'http'
     };
 
@@ -12,7 +12,7 @@ class Config {
     constructor() {
         this.env = process.env.NODE_ENV || 'local';
         this.port = Number(process.env.PORT) || Config.defaultConfig.port;
-        this.mongoUri = process.env.MONGO_URI || 'mongodb://localhost:27017/product';
+        this.mongoUri = process.env.MONGO_URI || 'mongodb://mongo:27017/product';
     }
 }
 

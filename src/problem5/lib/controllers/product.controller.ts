@@ -4,11 +4,15 @@ import {
     Response,
     Request,
 } from "express";
-import {
-    checkGetProducts
-} from "../middlewares/validations";
 import logger from "../util/logger";
 import ProductService from "../services/product.service";
+import {
+    checkCreateProducts,
+    checkDeleteProducts,
+    checkGetAllProducts, checkGetProducts,
+    checkUpdateProducts
+} from "../middlewares/validations";
+import {IProduct} from "../models/product.interface";
 export default class ProductController {
     public router: Router
 
@@ -105,6 +109,9 @@ export default class ProductController {
         try {
             logger.info(`POST /products: ${JSON.stringify(req.body)}`)
 
+            // validate request body
+            checkCreateProducts(req.body as IProduct)
+
             const product = await ProductService.create(req.body)
             res.json({
                 message: 'Product created',
@@ -120,6 +127,9 @@ export default class ProductController {
             logger.info(`GET /products: ${JSON.stringify(req.query)}`)
             const { page, limit } = req.query
 
+            // validate request query
+            checkGetAllProducts(Number(page), Number(limit))
+
             const products = await ProductService.list(Number(page), Number(limit))
             res.json({
                 message: 'Product list',
@@ -134,6 +144,12 @@ export default class ProductController {
     public update = async (req: Request, res: Response, next: NextFunction) => {
         try {
             logger.info(`PUT /products/${req.params.id}: ${JSON.stringify(req.body)}`)
+
+            // validate request body
+            checkUpdateProducts({
+                ...req.body,
+                id: req.params.id,
+            })
             const product = await ProductService.update(req.params.id, req.body)
             res.json({
                 message: 'Product updated',
@@ -148,6 +164,10 @@ export default class ProductController {
     public remove = async (req: Request, res: Response, next: NextFunction) => {
         try {
             logger.info(`DELETE /products/${req.params.id}`)
+
+            // validate request params
+            checkDeleteProducts(req.params.id)
+
             const product = await ProductService.remove(req.params.id)
             res.json({
                 message: 'Product removed',
@@ -162,6 +182,10 @@ export default class ProductController {
     public findById = async (req: Request, res: Response, next: NextFunction) => {
         try {
             logger.info(`GET /products/${req.params.id}`)
+
+            // validate request params
+            checkGetProducts(req.params.id)
+
             const product = await ProductService.findById(req.params.id)
             res.json({
                 data: product,

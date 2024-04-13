@@ -54,6 +54,7 @@ export class App {
         try {
             await mongoose.connect(config.mongoUri, connectOption)
         } catch (error) {
+            logger.info(`mongo uri: ${config.mongoUri}`)
             logger.error(`Failed to connect mongo at ${config.mongoUri.replace(/mongodb(\+srv)?:\/\/.*@/gi, '')}`)
             process.exit(1)
         }

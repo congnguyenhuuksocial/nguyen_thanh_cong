@@ -24,3 +24,34 @@
 {"level":"info","message":"GET /products: {\"page\":\"1\",\"limit\":\"100\"}"}
 {"level":"info","message":"POST /products: {\"name\":\"Sữa Chua\",\"price\":20000,\"stock\":1000,\"desctiption\":\"Sản xuất theo công nghệ châu âu\",\"category\":\"Milk\",\"image\":\"https://cdn.tgdd.vn/2021/08/CookRecipe/Avatar/sua-chua-yaourt-thumbnail.jpg\"}"}
 {"level":"info","message":"GET /products: {\"page\":\"1\",\"limit\":\"100\"}"}
+{"level":"info","message":"Connecting to mongo..."}
+{"level":"info","message":"worker 23987 is now running on port 3000 in local"}
+{"level":"info","message":"POST /products: {\"price\":20000,\"stock\":1000,\"desctiption\":\"Sản xuất theo công nghệ châu âu\",\"category\":\"Milk\",\"image\":\"https://cdn.tgdd.vn/2021/08/CookRecipe/Avatar/sua-chua-yaourt-thumbnail.jpg\"}"}
+{"level":"info","message":"Connecting to mongo..."}
+{"level":"info","message":"worker 2510 is now running on port 3000 in local"}
+{"level":"info","message":"Connecting to mongo..."}
+{"level":"info","message":"worker 2674 is now running on port 3000 in local"}
+{"level":"info","message":"POST /products: {\"name\":\"Sữa Chua\",\"price\":20000,\"stock\":1000,\"desctiption\":\"Sản xuất theo công nghệ châu âu\",\"category\":\"Milk\",\"image\":\"https://cdn.tgdd.vn/2021/08/CookRecipe/Avatar/sua-chua-yaourt-thumbnail.jpg\"}"}
+{"level":"info","message":"Connecting to mongo..."}
+{"level":"info","message":"worker 2788 is now running on port 3000 in local"}
+{"level":"info","message":"POST /products: {\"name\":\"Sữa Chua\",\"price\":20000,\"stock\":1000,\"desctiption\":\"Sản xuất theo công nghệ châu âu\",\"category\":\"Milk\",\"image\":\"https://cdn.tgdd.vn/2021/08/CookRecipe/Avatar/sua-chua-yaourt-thumbnail.jpg\"}"}
+{"level":"info","message":"Connecting to mongo..."}
+{"level":"info","message":"worker 2863 is now running on port 3000 in local"}
+{"level":"info","message":"POST /products: {\"name\":\"Sữa Chua\",\"price\":20000,\"stock\":1000,\"desctiption\":\"Sản xuất theo công nghệ châu âu\",\"category\":\"Milk\",\"image\":\"https://cdn.tgdd.vn/2021/08/CookRecipe/Avatar/sua-chua-yaourt-thumbnail.jpg\"}"}
+{"level":"info","message":"Connecting to mongo..."}
+{"level":"info","message":"worker 2963 is now running on port 3000 in local"}
+{"level":"info","message":"POST /products: {\"name\":\"Sữa Chua\",\"price\":20000,\"stock\":1000,\"desctiption\":\"Sản xuất theo công nghệ châu âu\",\"category\":\"Milk\",\"image\":\"https://cdn.tgdd.vn/2021/08/CookRecipe/Avatar/sua-chua-yaourt-thumbnail.jpg\"}"}
+{"level":"info","message":"checkCreateProducts: "}
+{"level":"info","message":"Connecting to mongo..."}
+{"level":"info","message":"worker 3067 is now running on port 3000 in local"}
+{"level":"info","message":"POST /products: {\"name\":\"Sữa Chua\",\"price\":20000,\"stock\":1000,\"description\":\"Sản xuất theo công nghệ châu âu\",\"category\":\"Milk\",\"image\":\"https://cdn.tgdd.vn/2021/08/CookRecipe/Avatar/sua-chua-yaourt-thumbnail.jpg\"}"}
+{"level":"info","message":"checkCreateProducts: "}
+{"level":"info","message":"GET /products/aw3v7nqjL"}
+{"level":"info","message":"Connecting to mongo..."}
+{"level":"info","message":"worker 3187 is now running on port 3000 in local"}
+{"level":"info","message":"Connecting to mongo..."}
+{"level":"info","message":"worker 3248 is now running on port 3000 in local"}
+{"level":"info","message":"GET /products/aw3v7nqjL"}
+{"level":"info","message":"GET /products: {\"page\":\"1\",\"limit\":\"100\"}"}
+{"level":"info","message":"DELETE /products/aw3v7nqjL"}
+{"level":"info","message":"GET /products: {\"page\":\"1\",\"limit\":\"100\"}"}

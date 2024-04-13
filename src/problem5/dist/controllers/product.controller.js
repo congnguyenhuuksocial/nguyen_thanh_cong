@@ -15,11 +15,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const logger_1 = __importDefault(require("../util/logger"));
 const product_service_1 = __importDefault(require("../services/product.service"));
+const validations_1 = require("../middlewares/validations");
 class ProductController {
     constructor() {
         this.create = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
                 logger_1.default.info(`POST /products: ${JSON.stringify(req.body)}`);
+                // validate request body
+                (0, validations_1.checkCreateProducts)(req.body);
                 const product = yield product_service_1.default.create(req.body);
                 res.json({
                     message: 'Product created',
@@ -35,8 +38,8 @@ class ProductController {
             try {
                 logger_1.default.info(`GET /products: ${JSON.stringify(req.query)}`);
                 const { page, limit } = req.query;
-                // validation
-                // checkGetProducts(req, res, next)
+                // validate request query
+                (0, validations_1.checkGetAllProducts)(Number(page), Number(limit));
                 const products = yield product_service_1.default.list(Number(page), Number(limit));
                 res.json({
                     message: 'Product list',
@@ -51,6 +54,8 @@ class ProductController {
         this.update = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
                 logger_1.default.info(`PUT /products/${req.params.id}: ${JSON.stringify(req.body)}`);
+                // validate request body
+                (0, validations_1.checkUpdateProducts)(Object.assign(Object.assign({}, req.body), { id: req.params.id }));
                 const product = yield product_service_1.default.update(req.params.id, req.body);
                 res.json({
                     message: 'Product updated',
@@ -65,6 +70,8 @@ class ProductController {
         this.remove = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
                 logger_1.default.info(`DELETE /products/${req.params.id}`);
+                // validate request params
+                (0, validations_1.checkDeleteProducts)(req.params.id);
                 const product = yield product_service_1.default.remove(req.params.id);
                 res.json({
                     message: 'Product removed',
@@ -79,6 +86,8 @@ class ProductController {
         this.findById = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
                 logger_1.default.info(`GET /products/${req.params.id}`);
+                // validate request params
+                (0, validations_1.checkGetProducts)(req.params.id);
                 const product = yield product_service_1.default.findById(req.params.id);
                 res.json({
                     data: product,
