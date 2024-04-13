@@ -518,7 +518,7 @@ deactivate Server
 5. **Authentication Service:** Validates the credentials and returns success or failure.
 6. **Validation:** If authenticated, the server validates the score increment.
 7. **Database Update:** Upon successful validation, the server updates the score in the database.
-8. **Real-time Update:** The server then triggers a real-time update to the live scoreboard using WebSockets or SSE.
+8. **Real-time Update:** The server then triggers a real-time update to the live scoreboard using WebSockets, AppSync or SSE.
 9. **Response to Client:** Finally, the server sends a response back to the client indicating the result of the operation (success or error).
 
 ### API Service Module for Live Scoreboard Update
@@ -563,10 +563,13 @@ Refer to the Execution_Flow_Diagram.png in this directory, which outlines the pr
   - **Unit Testing**: Write unit tests for API endpoints, authentication, and score update logic.
   - **Integration Testing**: Test the integration of the API service with the real-time update service and the database.
   - **Load Testing**: Conduct load testing to ensure the system can handle a high volume of score update requests.
+
 - **Deployment**
   - **CI/CD Pipeline**: Implement a CI/CD pipeline to automate the deployment process and ensure code quality.
   - **Containerization**: Use Docker for containerization to ensure consistency across different environments.
   - **Monitoring**: Implement monitoring tools to track the performance and availability of the API service.
+  - **Scaling**: Design the system to be horizontally scalable to handle increased traffic and score update requests.
+  - **Error Handling**: Implement robust error handling mechanisms to provide informative responses to users and log errors for debugging.
 
 - **Future Enhancements**
   - **Audit Logging:** Implement logging of all score update attempts to monitor and mitigate potential abuse.
