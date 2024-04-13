@@ -570,6 +570,7 @@ Refer to the Execution_Flow_Diagram.png in this directory, which outlines the pr
   - **Monitoring**: Implement monitoring tools to track the performance and availability of the API service.
   - **Scaling**: Design the system to be horizontally scalable to handle increased traffic and score update requests.
   - **Error Handling**: Implement robust error handling mechanisms to provide informative responses to users and log errors for debugging.
+  - **Cloud Deployment**: Deploy the API service on cloud platforms like AWS, Azure, or Google Cloud for scalability and reliability.
 
 - **Future Enhancements**
   - **Audit Logging:** Implement logging of all score update attempts to monitor and mitigate potential abuse.
