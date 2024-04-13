@@ -464,3 +464,112 @@ curl --location --request GET 'http://localhost:8080/v1/products/Ts3qYjDIT'
 **Note**: after running the code, you can import the Postman collection in the `postman` directory to test the API endpoints.
 [product.postman_collection.json](postman%2Fproduct.postman_collection.json)
 
+# Problem 6
+---
+## Diagram - Execution Flow
+![Execution_Flow_Diagram.png](images%2FExecution_Flow_Diagram.png)
+
+## UML Diagram PlantUML
+```plantuml
+@startuml
+participant User as "Client"
+participant "API Server" as Server
+participant "Authentication Service" as Auth
+participant "Database"
+participant "Real-time Update Service" as RTUS
+
+User -> Server: PUT /users/:id/socres \n(scoreIncrement)
+activate Server
+
+Server -> Auth: Validate user
+activate Auth
+Auth --> Server: Success/Failure
+deactivate Auth
+
+alt authentication successful
+    Server -> Server: Validate score increment
+    alt score increment valid
+        Server -> Database: Update score
+        activate Database
+        Database --> Server: Score updated
+        deactivate Database
+
+        Server -> RTUS: Trigger real-time update
+        activate RTUS
+        RTUS --> Server: Update triggered
+        deactivate RTUS
+
+        Server -> User: 200 OK
+    else invalid score increment
+        Server -> User: 403 Forbidden
+    end
+else authentication failed
+    Server -> User: 401 Unauthorized
+end
+
+deactivate Server
+@enduml
+```
+
+1. **User (Client) initiates action:** The sequence begins with the user completing an action that affects their score.
+2. **API Request:** The client sends a PUT request to `/users/:id/scores` with the user ID and score increment.
+3. **API Server receives request:** The server processes the request.
+4. **Authentication:** The server requests the authentication service to verify the user's identity.
+5. **Authentication Service:** Validates the credentials and returns success or failure.
+6. **Validation:** If authenticated, the server validates the score increment.
+7. **Database Update:** Upon successful validation, the server updates the score in the database.
+8. **Real-time Update:** The server then triggers a real-time update to the live scoreboard using WebSockets or SSE.
+9. **Response to Client:** Finally, the server sends a response back to the client indicating the result of the operation (success or error).
+
+### API Service Module for Live Scoreboard Update
+This documentation provides an overview of the API service module designed to update and maintain a live scoreboard for a website. The scoreboard displays the top 10 user scores and updates in real time as users complete certain actions that affect their scores.
+
+#### Features
+**Live Score Update**: The scoreboard updates in real time to reflect the scores of the top 10 users.
+**User Score Update**: Users can increase their scores through certain actions. An API call is dispatched to the server upon the completion of such actions.
+**Security**: Implementations are in place to prevent unauthorized score manipulation.
+
+**Endpoints**
+PUT /users/:id/scores
+**Description**: Updates the user's score and refreshes the live scoreboard.
+- **Request Body:**
+```json
+{
+  "scoreIncrement": "integer"
+}
+```
+- **Response:**
+  - 200 OK: Score updated successfully.
+  - 401 Unauthorized: User authentication failed.
+  - 403 Forbidden: Score update request rejected due to suspicious activity.
+
+- **Security**: This endpoint uses OAuth2 authentication to verify user identity and permissions.
+
+- **Flow of Execution**
+Refer to the Execution_Flow_Diagram.png in this directory, which outlines the process from action completion to scoreboard update.
+
+- **Technologies**
+  - **Backend Framework**: Node.js with Express (flexible to change based on team preference)
+  - **Database**: MongoDB or PostgreSQL (chosen based on existing infrastructure)
+  - **Authentication**: OAuth2 for secure API access
+  - **Real-Time Communication**: WebSockets, AppSync or Server-Sent Events (SSE) for live scoreboard updates
+
+- **Security Considerations**
+  - **Authentication**: Users must be authenticated to post score updates.
+  - **Rate Limiting**: Implement rate limiting to prevent abuse of the score update endpoint.
+  - **Validation**: Perform server-side validation of score increments to avoid unreasonable updates.
+
+- **Testing**
+  - **Unit Testing**: Write unit tests for API endpoints, authentication, and score update logic.
+  - **Integration Testing**: Test the integration of the API service with the real-time update service and the database.
+  - **Load Testing**: Conduct load testing to ensure the system can handle a high volume of score update requests.
+- **Deployment**
+  - **CI/CD Pipeline**: Implement a CI/CD pipeline to automate the deployment process and ensure code quality.
+  - **Containerization**: Use Docker for containerization to ensure consistency across different environments.
+  - **Monitoring**: Implement monitoring tools to track the performance and availability of the API service.
+
+- **Future Enhancements**
+  - **Audit Logging:** Implement logging of all score update attempts to monitor and mitigate potential abuse.
+  - **Machine Learning:** Utilize machine learning algorithms to detect and respond to anomalous behavior patterns in score updates.
+  - **Caching:** Implement caching mechanisms to reduce database load and improve response times for scoreboard updates.
+
