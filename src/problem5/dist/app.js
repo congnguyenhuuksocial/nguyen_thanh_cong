@@ -75,10 +75,11 @@ class App {
     }
     mongoSetup() {
         return __awaiter(this, void 0, void 0, function* () {
+            logger_1.default.info("Connecting to mongo...");
             mongoose.set('strictQuery', true);
             const connectOption = {
                 maxPoolSize: 10,
-                autoIndex: process.env.NODE_ENV !== 'production',
+                autoIndex: true,
             };
             try {
                 yield mongoose.connect(config_1.default.mongoUri, connectOption);
@@ -87,15 +88,15 @@ class App {
                 logger_1.default.error(`Failed to connect mongo at ${config_1.default.mongoUri.replace(/mongodb(\+srv)?:\/\/.*@/gi, '')}`);
                 process.exit(1);
             }
-            mongoose.connection.on('error', (error) => {
-                logger_1.default.error(`error: ${error}`);
-            });
+            // mongoose.connection.on('error', (error) => {
+            //     logger.error(`error: ${error}`)
+            // })
         });
     }
     init() {
         return __awaiter(this, void 0, void 0, function* () {
             this.config();
-            // await this.mongoSetup()
+            yield this.mongoSetup();
             return this.app;
         });
     }

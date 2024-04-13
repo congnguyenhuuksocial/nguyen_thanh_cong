@@ -43,11 +43,12 @@ export class App {
     }
 
     private async mongoSetup() {
+        logger.info("Connecting to mongo...")
         mongoose.set('strictQuery', true)
 
         const connectOption = {
             maxPoolSize: 10,
-            autoIndex: process.env.NODE_ENV !== 'production',
+            autoIndex: true,
         }
 
         try {
@@ -57,14 +58,14 @@ export class App {
             process.exit(1)
         }
 
-        mongoose.connection.on('error', (error) => {
-            logger.error(`error: ${error}`)
-        })
+        // mongoose.connection.on('error', (error) => {
+        //     logger.error(`error: ${error}`)
+        // })
     }
 
     async init(): Promise<express.Application> {
         this.config()
-        // await this.mongoSetup()
+        await this.mongoSetup()
         return this.app
     }
 }
