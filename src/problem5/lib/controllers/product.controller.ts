@@ -24,10 +24,8 @@ export default class ProductController {
     private routes() {
         /**
          * Get a list of products
-         * Access level: Admin, Agent
          * @route GET /products
          * @group Product
-         * @security JWT
          * @returns {Array.<Product>} 200
          * @returns {Error.model} 403 - Forbidden error
          * @returns {Error.model} 500 - Internal error
@@ -37,10 +35,8 @@ export default class ProductController {
 
         /**
          * Create a new product
-         * Access level: Admin
          * @route POST /products
          * @group Product
-         * @security JWT
          * @param {Product.model} product.body.required - Product data
          * @returns {Product.model} 200
          * @returns {Error.model} 403 - Forbidden error
@@ -52,10 +48,8 @@ export default class ProductController {
 
         /**
          * Update a product
-         * Access level: Admin
          * @route PUT /products/{id}
          * @group Product
-         * @security JWT
          * @param {string} id.path.required - Product ID
          * @param {Product.model} product.body.required - Product data
          * @returns {Product.model} 200
@@ -69,10 +63,8 @@ export default class ProductController {
 
         /**
          * Remove a product
-         * Access level: Admin
          * @route DELETE /products/{id}
          * @group Product
-         * @security JWT
          * @param {string} id.path.required - Product ID
          * @returns {Product.model} 200
          * @returns {Error.model} 403 - Forbidden error
@@ -86,10 +78,8 @@ export default class ProductController {
 
         /**
          * Get a product detail
-         * Access level: Admin, Agent
          * @route GET /products/{id}
          * @group Product
-         * @security JWT
          * @param {string} id.path.required - Product ID
          * @returns {Product.model} 200
          * @returns {Error.model} 403 - Forbidden error
